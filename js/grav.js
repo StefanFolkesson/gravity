@@ -22,7 +22,7 @@ function init() { //Funktion som kallas på när sidan laddats och kan kallas p�
         deltay*=-1; //Inverterar hastigheten i y-led. 
       }
 
-      deltax*=0.75; //lägger xleds friktion på kvadraten.
+      deltax*=0.97; //lägger xleds friktion på kvadraten.
       posx+=deltax; //Adderar förändringar av position i x-led.
 
       if (Math.abs(deltay)<0.001) { //Om positionsförändringarna är för små sätts dem till noll.
@@ -31,6 +31,15 @@ function init() { //Funktion som kallas på när sidan laddats och kan kallas p�
       if (Math.abs(deltax)<0.001) { //Om positionsförändringarna är för små sätts dem till noll.
         deltax=0;
       }
+    }
+    if(posx<0){
+      deltax*=-1;
+      posx=0;
+    }
+    if(posx>(600-width))
+    {
+      deltax*=-1;
+      posx=600-width;
     }
     context.clearRect(0,0,600,500); //Tömmer ritytan
     context.fillStyle="red"; //Anger färgen för nästa fyllningsoperation.
