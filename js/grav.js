@@ -6,6 +6,7 @@ var ground = 400; //Maximiumvärde för position i y-led.
 var width =100;   // KOmmentarer
 var height = 100;  //( KOmmentarer)
 var pickup = false;
+var morgan = true;
 
 function init() { //Funktion som kallas på när sidan laddats och kan kallas på för att starta om allting.
   canvas = document.getElementById('rityta'); //Lagrar elementet med id:t rityta i en variabel.
@@ -19,7 +20,7 @@ function init() { //Funktion som kallas på när sidan laddats och kan kallas p�
 
       if (posy > ground) { //Avgör om kvadraten är under marken. Om så är fallet:
         posy=ground; //Korrigerar kvadratens y-position.
-        deltay*=-1; //Inverterar hastigheten i y-led. 
+        deltay*=-1; //Inverterar hastigheten i y-led.
       }
 
       deltax*=0.99; //lägger xleds friktion på kvadraten.
