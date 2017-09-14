@@ -41,7 +41,8 @@ function init() { //Funktion som kallas på när sidan laddats och kan kallas p�
       deltax*=-1;
       posx=600-width;
     }
-    context.clearRect(0,0,600,500); //Tömmer ritytan
+    context.fillStyle="purple";
+    context.fillRect(0,0,600,500); //Tömmer ritytan
     context.fillStyle="red"; //Anger färgen för nästa fyllningsoperation.
     context.fillRect(posx,posy,100,100); //Ritar en rektangel vid (posx,posy) med bredd och höjd 100.
   },20); //Intervallet, hur ofta funtionen kallas på.
