@@ -5,31 +5,33 @@ var deltay = 0; //Förändringar av position i y-led.
 var ground = 400; //Maximiumvärde för position i y-led.
 var width =100;   // KOmmentarer
 var height = 100;  //( KOmmentarer)
+var pickup = false;
 
 function init() { //Funktion som kallas på när sidan laddats och kan kallas på för att starta om allting.
   canvas = document.getElementById('rityta'); //Lagrar elementet med id:t rityta i en variabel.
   context = canvas.getContext('2d'); //Hämtar ett objekt från canvas som man kan utföra ritoperationer med.
 
   gameInterval = setInterval(function (){ //Deklarerar en variabel som kan ersättas med null för att avbryta iterationen.
-    deltay++; // Gravitation
-    deltay*=0.99; //Tröghetsfaktor
-    posy+=deltay; //Lägger på hastigheten i y led
+    if(!pickup){
+      deltay++; // Gravitation
+      deltay*=0.99; //Tröghetsfaktor
+      posy+=deltay; //Lägger på hastigheten i y led
 
-    if (posy > ground) { //Avgör om kvadraten är under marken. Om så är fallet:
-      posy=ground; //Korrigerar kvadratens y-position.
-      deltay*=-1; //Inverterar hastigheten i y-led. 
+      if (posy > ground) { //Avgör om kvadraten är under marken. Om så är fallet:
+        posy=ground; //Korrigerar kvadratens y-position.
+        deltay*=-1; //Inverterar hastigheten i y-led. 
+      }
+
+      deltax*=0.75; //lägger xleds friktion på kvadraten.
+      posx+=deltax; //Adderar förändringar av position i x-led.
+
+      if (Math.abs(deltay)<0.001) { //Om positionsförändringarna är för små sätts dem till noll.
+        deltay=0;
+      }
+      if (Math.abs(deltax)<0.001) { //Om positionsförändringarna är för små sätts dem till noll.
+        deltax=0;
+      }
     }
-
-    deltax*=0.75; //lägger xleds friktion på kvadraten.
-    posx+=deltax; //Adderar förändringar av position i x-led.
-
-    if (Math.abs(deltay)<0.001) { //Om positionsförändringarna är för små sätts dem till noll.
-      deltay=0;
-    }
-    if (Math.abs(deltax)<0.001) { //Om positionsförändringarna är för små sätts dem till noll.
-      deltax=0;
-    }
-
     context.clearRect(0,0,600,500); //Tömmer ritytan
     context.fillStyle="red"; //Anger färgen för nästa fyllningsoperation.
     context.fillRect(posx,posy,100,100); //Ritar en rektangel vid (posx,posy) med bredd och höjd 100.
@@ -53,19 +55,25 @@ window.addEventListener("mouseup",function(e){
   var mousex=e.clientX;
   var mousey=e.clientY;
   if(mousex>posx&&mousex<(posx+width))
-    if(mousey>posy&&mousey<(posy+width)){
-      deltay-=10;
-    }
-//  console.log("Xpos: "+e.clientX);
+  if(mousey>posy&&mousey<(posy+width)){
+    pickup= false;
+  }
 });
 
 window.addEventListener("mousemove",function(e){
+  if(pickup){
+    posx=e.clientX-width/2;
+    posy=e.clientY-height/2;
+  }
+});
+
+window.addEventListener("mousedown",function(e){
   e=window.event;
   var mousex=e.clientX;
   var mousey=e.clientY;
   if(mousex>posx&&mousex<(posx+width))
   if(mousey>posy&&mousey<(posy+width)){
-    deltax-=1;
+    pickup= true;
   }
 
 });
