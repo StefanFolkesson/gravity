@@ -3,8 +3,8 @@ var posy = 100; //Anger y positionen på fyrkanten
 var deltax = 0; //Förändringar av position i x-ledd
 var deltay = 0; //Förändringar av position i y-led.
 var ground = 400; //Maximiumvärde för position i y-led.
-var width =100;
-var height = 100;
+var width =100;   // KOmmentarer
+var height = 100;  //( KOmmentarer)
 
 function init() { //Funktion som kallas på när sidan laddats och kan kallas på för att starta om allting.
   canvas = document.getElementById('rityta'); //Lagrar elementet med id:t rityta i en variabel.
