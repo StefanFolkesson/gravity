@@ -51,13 +51,7 @@ window.addEventListener("keydown",function(e){ //Lägger till en händelselyssna
 });
 
 window.addEventListener("mouseup",function(e){
-  e=window.event;
-  var mousex=e.clientX;
-  var mousey=e.clientY;
-  if(mousex>posx&&mousex<(posx+width))
-  if(mousey>posy&&mousey<(posy+width)){
     pickup= false;
-  }
 });
 
 window.addEventListener("mousemove",function(e){
