@@ -22,7 +22,7 @@ function init() { //Funktion som kallas på när sidan laddats och kan kallas p�
         deltay*=-1; //Inverterar hastigheten i y-led. 
       }
 
-      deltax*=0.97; //lägger xleds friktion på kvadraten.
+      deltax*=0.99; //lägger xleds friktion på kvadraten.
       posx+=deltax; //Adderar förändringar av position i x-led.
 
       if (Math.abs(deltay)<0.001) { //Om positionsförändringarna är för små sätts dem till noll.
@@ -65,8 +65,10 @@ window.addEventListener("mouseup",function(e){
 
 window.addEventListener("mousemove",function(e){
   if(pickup){
-    posx=e.clientX-width/2;
-    posy=e.clientY-height/2;
+    deltax=e.movementX;
+    deltay=e.movementY;
+      posx+=e.movementX;
+    posy+=e.movementY;
   }
 });
 
